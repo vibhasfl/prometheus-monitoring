@@ -1,0 +1,26 @@
+# groups:
+# - name: cpu-node
+#   rules:
+#   - record: job_instance_mode:node_cpu_seconds:avg_rate5m
+#     expr: avg by (job, instance, mode) (rate(node_cpu_seconds_total[5m]))
+
+groups:
+  - name: memory-node
+    rules:
+      - record: job:process_resident_memory_bytes:avg_1m
+        expr: avg by(job)(avg_over_time(process_resident_memory_bytes{job="apollo"}[1m]))
+
+      - record: job:app_response_latency_seconds:rate1m
+        expr: rate(rest_response_time_duration_seconds_sum[1m]) / rate(rest_response_time_duration_seconds_count[1m])
+
+      - alert: AppLatencyAbove5Sec
+        expr: (job:app_response_latency_seconds:rate1m / 1000) >= 5
+        for: 1m
+        labels:
+          severity: Critical
+
+      - alert: AppLatencyAbove2Sec
+        expr: 2 < (job:app_response_latency_seconds:rate1m /1000) < 5
+        for: 1m
+        labels:
+          severity: Warning

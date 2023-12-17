@@ -1,0 +1,11 @@
+[
+    {
+        "targets":[
+            "host.docker.internal:4000",
+            "host.docker.internal:4001"
+        ],
+        "labels":{
+            "job":"apollo"
+        }
+    }
+]

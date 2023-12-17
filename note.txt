@@ -1,0 +1,45 @@
+https://github.com/coder-society/nodejs-application-monitoring-with-prometheus-and-grafana/blob/master/example-nodejs-app/index.js
+https://codersociety.com/blog/articles/nodejs-application-monitoring-with-prometheus-and-grafana
+https://github.com/TomDoesTech/REST-API-Tutorial-Updated/blob/main/src/utils/metrics.ts
+https://stackabuse.com/nodejs-application-monitoring-with-prometheus-and-grafana/
+https://github.com/grafana/jsonnet-libs/tree/master/nodejs-mixin
+
+https://stackoverflow.com/questions/71757352/how-can-i-create-panel-to-show-the-count-of-http-request-duration-to-be-less-tha
+https://stackoverflow.com/questions/66282512/grafana-graphing-http-requests-per-minute-with-http-server-requests-seconds-coun
+
+
+https://nodeshift.dev/nodejs-reference-architecture/operations/metrics/
+https://www.reddit.com/r/PrometheusMonitoring/comments/133uzr8/nodejs_express_api_request_hit_per_second/
+
+https://www.retgits.com/2017/08/how-to-monitor-your-node.js-apps-with-prometheus/
+
+https://www.npmjs.com/package/express-prom-bundle
+
+https://www.youtube.com/watch?v=fhx0ehppMGM
+
+https://povilasv.me/prometheus-tracking-request-duration/
+
+https://reachmnadeem.wordpress.com/2021/02/11/instrumenting-nodejs-express-applications-for-prometheus-metrics/
+
+https://github.com/RisingStack/example-prometheus-nodejs/tree/master
+https://stackoverflow.com/questions/48835035/average-memory-usage-query-prometheus
+
+sum(round(increase(rest_response_time_duration_seconds_count[$__rate_interval])))
+sum(rate(rest_response_time_duration_seconds_count[$__rate_interval])) by (route,status_code,method)
+sum(rate(rest_response_time_duration_seconds_count[$__rate_interval])) by (service, route, method, code)  * 60
+
+
+Good to read : https://developer.ibm.com/articles/nodejs-memory-management-in-container-environments/
+
+
+Grafana : Dependend vars https://www.youtube.com/watch?v=lF1AjYeqt4E
+https://www.youtube.com/watch?v=6jYKn5ULJX0
+https://play.grafana.org/dashboards?query=node
+
+
+Docker setup
+"host.docker.internal:4000",
+https://huzaima.io/blog/connect-localhost-docker
+https://github.com/PagerTree/prometheus-grafana-alertmanager-example/tree/master
+
+

@@ -1,0 +1,100 @@
+version: '3.1'
+
+services:
+  prometheus:
+    container_name: prometheus
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    image: prom/prometheus:v2.48.1
+    ports:
+      - 9090:9090
+    volumes:
+      - ./prometheus/data:/prometheus
+      - ./prometheus/config:/etc/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.enable-lifecycle'
+    restart: always
+
+  grafana:
+    container_name: grafana
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+    image: grafana/grafana
+    ports:
+      - 3000:3000
+    volumes:
+      - ./grafana/data:/var/lib/grafana
+    restart: unless-stopped
+
+  alertmanager:
+    container_name: alertmanager
+    image: prom/alertmanager:v0.26.0
+    ports:
+      - 9093:9093
+    volumes:
+      - ./alertmanager/config:/config
+      - ./alertmanager/data:/data
+    restart: always
+    command:
+      - '--config.file=/config/alertmanager.yml'
+      - '--storage.path=/data'
+    deploy:
+      mode: global
+
+  blackbox_exporter:
+    container_name: blackbox_exporter
+    image: prom/blackbox-exporter:v0.24.0
+    ports:
+      - 9115:9115
+    volumes:
+      - ./blackboxexporter/config:/config
+    command:
+      - '--config.file=/config/blackbox.yml'
+    restart: always
+
+
+  nodeapp1:
+   container_name: node-app1
+   image: node-app
+   build: ./node-app
+   ports:
+     - 4000:4000
+     - 5000:5000
+   volumes:
+     - ./node-app:/app
+   environment:
+     - PORT=5000
+     - PPORT=4000
+     
+
+  nodeapp2:
+   container_name: node-app2
+   image: node-app
+   build: ./node-app
+   ports:
+     - 4001:4001
+     - 5001:5001
+   volumes:
+     - ./node-app:/app
+   environment:
+     - PORT=5001
+     - PPORT=4001
+  
+  # node-exporter:
+  #   image: prom/node-exporter
+  #   volumes:
+  #     - /proc:/host/proc:ro
+  #     - /sys:/host/sys:ro
+  #     - /:/rootfs:ro
+  #   command:
+  #     - '--path.procfs=/host/proc'
+  #     - '--path.sysfs=/host/sys'
+  #     - --collector.filesystem.ignored-mount-points
+  #     - "^/(sys|proc|dev|host|etc|rootfs/var/lib/docker/containers|rootfs/var/lib/docker/overlay2|rootfs/run/docker/netns|rootfs/var/lib/docker/aufs)($$|/)"
+  #   ports:
+  #     - 9100:9100
+  #   restart: always
+  #   deploy:
+  #     mode: global
