@@ -10,7 +10,7 @@ alerting:
   alertmanagers:
     - scheme: http
       static_configs:
-        - targets: [ 'localhost:9093' ]
+        - targets: [ 'host.docker.internal:9093' ]
 
 scrape_configs:
   
@@ -34,17 +34,25 @@ scrape_configs:
         
 
 # Try to hit http://localhost:9115/probe?module=http_2xx&target=host.docker.internal:5000&debug=true
+
+# If we don't add relabel configs it will try to scrape http://host.docker.internal:5000/probe
+
   - job_name: probe-node-app
+    scrape_interval: 30s
     static_configs:
        - targets:
-           - 'host.docker.internal:5000'
-           - 'host.docker.internal:5001'
+           - 'host.docker.internal:5000/health-check'
+           - 'host.docker.internal:5001/health-check'
     metrics_path: /probe
     params:
       module: [http_2xx]
     relabel_configs:
-     - source_labels: [__address__]
-       target_label: __param_target
+    #  - source_labels: [__address__]
+    #    target_label: __address__
+    #    regex: (.*)
+    #    replacement: '${1}/health-check'
+     - source_labels: [__address__] # Here we need to replace address of target i.e host.docker.internal:5000 to address of blackbox exporter
+       target_label: __param_target # temp assignment to __param_target
      - source_labels: [__param_target]
        target_label: instance
      - target_label: __address__

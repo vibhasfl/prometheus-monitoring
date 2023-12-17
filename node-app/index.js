@@ -32,6 +32,12 @@ app.get('/', (req, res) => {
   return res.send('Hello World!')
 })
 
+app.get('/health-check', (req, res) => {
+  console.log('health-check')
+  return res.send('health-check')
+})
+
+
 app.get('/delay', async (req, res) => {
   await sleep(3000)
   return res.status(200).send('3s delay route')

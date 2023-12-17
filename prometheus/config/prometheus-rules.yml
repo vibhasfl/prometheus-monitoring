@@ -24,3 +24,11 @@ groups:
         for: 1m
         labels:
           severity: Warning
+
+      - alert: NodeAppDown
+        expr: probe_success == 0
+        for: 10s
+        labels:
+          severity: Critical
+        annotations:
+          summary: "Endpoint {{ $labels.instance }} is down"
