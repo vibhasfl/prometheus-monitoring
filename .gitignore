@@ -1,0 +1,4 @@
+prometheus/data/
+node-app/node_modules/
+grafana/data/grafana.db
+alertmanager/data/
