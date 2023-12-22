@@ -26,6 +26,7 @@ services:
       - 3000:3000
     volumes:
       - ./grafana/data:/var/lib/grafana
+      - ./grafana/config/credentials:/usr/share/grafana/.aws/credentials
     restart: always
 
   alertmanager:
