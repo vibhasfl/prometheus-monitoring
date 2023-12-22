@@ -26,7 +26,7 @@ services:
       - 3000:3000
     volumes:
       - ./grafana/data:/var/lib/grafana
-    restart: unless-stopped
+    restart: always
 
   alertmanager:
     container_name: alertmanager
@@ -67,6 +67,7 @@ services:
    environment:
      - PORT=5000
      - PPORT=4000
+   restart: always
      
 
   nodeapp2:
@@ -81,6 +82,7 @@ services:
    environment:
      - PORT=5001
      - PPORT=4001
+   restart: always
   
   # node-exporter:
   #   image: prom/node-exporter

@@ -42,4 +42,8 @@ Docker setup
 https://huzaima.io/blog/connect-localhost-docker
 https://github.com/PagerTree/prometheus-grafana-alertmanager-example/tree/master
 
+Grafana display alertmanager 
+using transformation
+https://play.grafana.org/d/U_bZIMRMk/table-panel-showcase?orgId=1&tab=transform
+
 
