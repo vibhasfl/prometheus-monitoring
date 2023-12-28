@@ -1,0 +1,11 @@
+groups:
+  - name: nodeapp
+    rules:
+      - alert: NodeAppDown
+        expr: probe_success == 0
+        for: 10s
+        labels:
+          severity: Critical
+          team: TeamC
+        annotations:
+          summary: "Endpoint(s) {{ $labels.instance }} is down"

@@ -5,6 +5,7 @@ global:
 
 rule_files:
   - prometheus-rules.yml
+  - nodeapp-rules.yml
 
 alerting:
   alertmanagers:

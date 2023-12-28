@@ -47,3 +47,14 @@ using transformation
 https://play.grafana.org/d/U_bZIMRMk/table-panel-showcase?orgId=1&tab=transform
 
 
+
+https://www.sobyte.net/post/2022-03/prometheus-nginx-proxy/
+https://serverfault.com/questions/941327/grafana-behind-aws-alb
+https://gist.github.com/krisek/65442ba99eb773e9acbd0597d0a5f859
+https://sbcode.net/prometheus/prometheus-node-exporter/
+https://grafana.com/tutorials/run-grafana-behind-a-proxy/
+https://rohan-j-tiwari.medium.com/grafana-installation-on-amazon-private-ec2-instance-36dda72299d2
+https://github.com/grafana/grafana/issues/12177
+https://aws.amazon.com/blogs/opensource/setting-up-grafana-on-ec2-to-query-metrics-from-amazon-managed-service-for-prometheus/
+
+

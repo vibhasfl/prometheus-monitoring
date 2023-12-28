@@ -13,22 +13,27 @@ groups:
       - record: job:app_response_latency_seconds:rate1m
         expr: rate(rest_response_time_duration_seconds_sum[1m]) / rate(rest_response_time_duration_seconds_count[1m])
 
+
       - alert: AppLatencyAbove5Sec
         expr: (job:app_response_latency_seconds:rate1m / 1000) >= 5
         for: 1m
         labels:
           severity: Critical
+          team: TeamA
+
 
       - alert: AppLatencyAbove2Sec
         expr: 2 < (job:app_response_latency_seconds:rate1m /1000) < 5
         for: 1m
         labels:
           severity: Warning
+          team: TeamB
 
-      - alert: NodeAppDown
-        expr: probe_success == 0
-        for: 10s
-        labels:
-          severity: Critical
-        annotations:
-          summary: "Endpoint {{ $labels.instance }} is down"
+      # - alert: NodeAppDown
+      #   expr: probe_success == 0
+      #   for: 10s
+      #   labels:
+      #     severity: Critical
+      #     team: TeamC
+      #   annotations:
+      #     summary: "Endpoint {{ $labels.instance }} is down"
